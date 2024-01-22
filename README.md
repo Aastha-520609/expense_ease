@@ -28,3 +28,6 @@ Provide intelligent suggestions for categorizing expenses based on past behavior
 9)History:
 Allow user to view the history of all expenses done.
 
+#### Link of the postman documentation.
+
+https://documenter.getpostman.com/view/32347993/2s9YymFj3j

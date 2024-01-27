@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 // Middleware to parse JSON body in requests
-app.use(express.json());
+app.use(express.json()); 
 
 // Route for the home page
 app.get("/home", (req, res) => {

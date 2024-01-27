@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 // Middleware to parse JSON body in requests
-app.use(express.json());
+app.use(express.json()); 
 
 // Route for the home page
 app.get("/home", (req, res) => {
@@ -66,6 +66,25 @@ app.get('/home/login/dashboard/get_incomes/:category', (req, res) => {
     }
 });
 
+//route to add income
+app.post("/home/login/dashboard/add_income", (req, res) => {
+    const { category, amount } = req.body;
+    if (!category || !amount) {
+        return res.status(400).json({ "error": "Both category and amount are required" });
+    }
+
+    // Add the new income to the income list
+    incomeData.push({ category, amount });
+
+    // Respond with the updated income list
+    res.json({
+        "message" : "Income added successfully",
+        "incomeData": incomeData
+    });
+});
+
+
+
 // Sample data with key-value pairs for expense categories and amounts
 const expenseData = [
     { category: 'Groceries', amount: 200 },
@@ -87,6 +106,51 @@ app.get('/home/login/dashboard/get_expenses/:category', (req, res) => {
         res.status(404).json({ "error": "Category not found" });
     }
 });
+
+//Route to add expense
+app.post("/home/login/dashboard/add_expense", (req, res) => {
+    const { category, amount } = req.body;
+    if (!category || !amount) {
+        return res.status(400).json({ "error": "Both category and amount are required" });
+    }
+
+    // Add the new income to the income list
+    expenseData.push({ category, amount });
+
+    // Respond with the updated income list
+    res.json({
+        "message" : "Expense added successfully",
+        "expenseData": expenseData
+    });
+});
+
+//put to update amount in particular category
+app.put('/home/login/dashboard/update_expense/:category', (req, res) => {
+    const requestedCategory = req.params.category;
+    const updatedAmount = req.body.amount;
+
+    // Check if required data is provided
+    if (!updatedAmount) {
+        return res.status(400).json({ "error": "Amount is required in the request body" });
+    }
+
+    // Find the requested category in the expenseList array
+    const expenseToUpdate = expenseData.find(expense => expense.category === requestedCategory);
+
+    if (expenseToUpdate) {
+        // Update the amount for the specified expense category
+        expenseToUpdate.amount = updatedAmount;
+
+        // Respond with the updated expense list
+        res.json({
+            "message": "Expense amount updated successfully",
+            "expenseData": expenseData
+        });
+    } else {
+        res.status(404).json({ "error": "Expense category not found" });
+    }
+});
+
 
 // Route to logout (redirects to login in future)
 app.get('/home/login/dashboard/logout', (req, res) => {

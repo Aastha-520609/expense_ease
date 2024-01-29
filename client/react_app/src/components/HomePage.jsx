@@ -4,6 +4,7 @@ import FrameComponent from "./FrameComponent";
 const HomePage = () => {
   return (
     <div>
+      <h1>Sorry forgot to merge the pull before commiting.</h1>
     <FrameComponent />
     <main>
       <div />

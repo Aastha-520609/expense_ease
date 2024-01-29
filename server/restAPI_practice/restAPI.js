@@ -1,15 +1,25 @@
 const express = require("express");
-//import express from "express";
+const mongoose = require("mongoose");
+
 const app = express();
 const port = 3000;
 
+const data = 
+
 app.use(express.json());
 
+const uri = "mongodb+srv://aasthachaudhary5050:AasthaMongo@cluster0.mnrvgwo.mongodb.net/test";
+console.log("Database connected");
+
 //creating a schema
-let students = [
-    { uid: 1, sem1: 1, sem2: 2, cgpa: 8.75 },
-    {uid: 2, sem1: 2, sem2: 3, cgpa: 7.75}
-  ];
+const Schema = new mongoose.Schema({
+        uid: Number,
+        sem1: Number,
+        sem2: Number,
+        cgpa: Number,
+  });
+
+const studentsDocument = mongoose.model("students", Schema);
 
 //get
 app.get("/students", (req,res) => {
@@ -37,7 +47,7 @@ app.put('/students/:uid', (req, res) => {
 });
 
 //patch
-app.patch('/students/:uid', (req, res) => {
+app.patch('/students/v1/:uid', (req, res) => {
     const uid = parseInt(req.params.uid);
     const student = students.find((s) => s.uid === uid);
   
@@ -50,7 +60,7 @@ app.patch('/students/:uid', (req, res) => {
   });
 
 //delete
-app.delete('/students/:uid', (req, res) => {
+app.delete('/students/d1/:uid', (req, res) => {
     const uid = parseInt(req.params.uid);
     const studentIndex = students.findIndex((s) => s.uid === uid);
   

@@ -31,6 +31,3 @@ Allow user to view the history of all expenses done.
 #### Link of the postman documentation.
 
 https://documenter.getpostman.com/view/32347993/2s9YymFj3j
-
-#### Link of the deployment before connecting it to atlas
-https://create-restapi.onrender.com

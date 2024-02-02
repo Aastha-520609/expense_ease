@@ -39,3 +39,5 @@ https://create-restapi.onrender.com
 
 https://expense-ease-01.netlify.app/
 
+#### Link of the deployment on netlify using github repo.
+https://main--aastha-chaudhary-expense-ease.netlify.app/

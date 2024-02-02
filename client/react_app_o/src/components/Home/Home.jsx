@@ -21,7 +21,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="absolute inset-0 w-full sm:my-20 sm:pt-1 pt-12 h-full sm:w-96 ml-auto">
-                    <img className="w-96"  src="https://i.ibb.co/sj9WnKS/6749498-3432989.jpg" alt="image1"/>
+                    <img className="w-96"  src="https://i.ibb.co/sj9WnKS/6749498-3432989.jpg"  alt="image1"/>
                 </div>
                 
             </aside>

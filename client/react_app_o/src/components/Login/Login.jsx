@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Dashboard from '../Dashboard/Dashboard';
 function Login() {
   return (
    <div className="w-[1217px] [background:linear-gradient(116.73deg,_#8743ff,_rgba(41,_38,_96,_0.82)_15.5%,_#424070_85%,_#4136f1)]">
@@ -33,7 +33,9 @@ function Login() {
                     </label>
                     <span className="ml-auto">Forgot Password?</span>
                 </div>
+                <Link to = "/dashboard">
                 <button type="submit">Login</button>
+                </Link>
                 <div className="mt-4">
                     <span>
                     New Here? <Link to="#">Create an Account</Link>

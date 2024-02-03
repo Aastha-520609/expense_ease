@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
     return (
@@ -12,9 +13,9 @@ export default function Home() {
                             <span className="hidden sm:block text-4xl">In One Place</span>
                         </h2>
 
-                        <Link
+                        <Link 
                             className="inline-flex text-white items-center px-6 py-3 font-medium bg-violet-700 rounded-lg hover:opacity-75"
-                            to="/"
+                            to="/getstarted"
                         >
                             &nbsp; Get Started
                         </Link>
@@ -28,6 +29,11 @@ export default function Home() {
 
             <h1 className="text-center text-2xl sm:text-4xl py-5 font-medium">Save with Ease</h1>
             <p className = "text-center text-2xl mt- 5 mb-10">Empower Your Finances, One Expense at a Time: Your Journey to Financial Freedom Starts Here.</p>
+
+            <div className="grid place-items-center ml- 20 mt-5 mb-20">
+                <img className="sm:w-96 w-48" src="https://i.ibb.co/cbNvyfr/20133400-6264318.jpg" alt="image1" />
+            </div>
+            <div><Footer/></div>
         </div>
     );
 }

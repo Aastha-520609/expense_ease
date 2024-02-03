@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function Footer() {
+function Footer() {
     return (
         <footer className="bg-violet-600 border">
             <div className="mx-auto w-full max-w-screen-2xl p-4 py-6 lg:py-8">
@@ -9,7 +9,7 @@ export default function Footer() {
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center">
                             <img
-                                src=""
+                                src="https://i.ibb.co/Kw3087C/logo.jpg"
                                 className="mr-3 h-16"
                                 alt="ExpenseEase"
                             />
@@ -138,3 +138,4 @@ export default function Footer() {
         </footer>
     );
 }
+export default Footer;

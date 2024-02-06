@@ -1,32 +1,43 @@
-# expense_ease
+##StyleSphere
 
-**List of Features:
-1)Expense & Income Entry:
-Allow users to manually enter personal expenses nd income with details.
+###List of Features:
 
-2)Category Management:
-Allow users to create, edit, and delete expense & income categories.
-Auto-categorization based on transaction history.
+####Clothing Category Navigation:
+-> Allow users to browse clothes category-wise (Men, Women, Kids).
+-> Upon selecting a category, display relevant products accordingly.
 
-3)Insights:
-Visualize expense data through graphs and charts.
+####User Authentication:
+->Implement secure login authentication for users.
+->Ensure protection of user credentials and personal information.
 
-5)Search and Filters:
-Implement robust search functionality for locating specific transactions.
-Allow users to apply filters based on date, category, or amount.
+####Admin Panel:
+->Provide an admin login panel for the website owner.
+->Enable the owner to add, edit, and delete clothes details on the website.
 
-6)User Authentication and Security:
-Implement secure user authentication.
-Encrypt and protect user data with industry-standard security measures.
+####Add to Cart Feature:
+->Allow users to add items to their cart while browsing.
+->Display the total count of items in the cart.
+->Calculate and display the total cost of items in the cart.
 
-7)Responsive Design:
-Ensure the application is responsive and accessible on various devices.
+####Payment Gateway Integration:
+->Incorporate a secure payment gateway for seamless transactions.
+->Ensure encryption and protection of financial data during payments.
 
-8)Smart Suggestions:
-Provide intelligent suggestions for categorizing expenses based on past behavior.
+####Responsive Design:
+->Design the website to be responsive and adaptable to different devices and screen sizes.
+->Provide an optimal user experience across desktops, tablets, and mobile phones.
 
-9)History:
-Allow user to view the history of all expenses done.
+####Search and Filters:
+->Implement a robust search functionality to help users find specific clothing items.
+->Allow users to apply filters based on categories, sizes, colors, etc., for easier navigation.
+
+####Order History:
+->Enable users to view their past orders and transaction history.
+->Allow users to track their orders and delivery status.
+
+####Customer Support:
+->Offer customer support channels such as live chat, email, or phone for assistance.
+->Address user queries and concerns promptly to ensure a positive shopping experience.
 
 #### Link of the postman documentation.
 
@@ -37,7 +48,7 @@ https://create-restapi.onrender.com
 
 #### Link of the Frontend Deployment.
 
-https://expense-ease-01.netlify.app/
+https://aastha-chaudhary.netlify.app/
 
 #### Link of the deployment on netlify using github repo.
 https://main--aastha-chaudhary-expense-ease.netlify.app/

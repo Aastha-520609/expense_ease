@@ -1,0 +1,142 @@
+.hero {
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    transform: translate(-10%, -50%);
+    z-index: 1;
+    text-align: center;
+}
+
+.text-content {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.text-content h1 {
+    text-align: center;
+}
+
+.text-content h3 {
+    white-space: nowrap;
+    color: rgb(244, 108, 153);
+    margin-bottom: 10px;
+}
+
+.text-content p {
+    font-size: 1rem;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.latest-collection-btn {
+    background-color: rgb(244, 108, 153);
+    color: white;
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-size: 1rem; 
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+@media (max-width: 480px) {
+    .overlay-text {
+        top: 90%; 
+        left: 50%; 
+        transform: translate(-50%, -50%);
+    }
+
+    .text-content {
+        font-size: 0.5rem;
+    }
+
+    .latest-collection-btn {
+        padding: 10px 15px; 
+        font-size: 0.9rem;
+        margin-left: 0; 
+    }
+}
+
+
+/* .hero{
+    position: relative;
+}
+.hero img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+.text-content {
+    color: white;
+    font-size: 1.5rem; 
+    font-weight: bold; 
+}
+
+.text-content h1{
+    text-align: center;
+}
+
+.text-content h3{
+    white-space: nowrap;
+    color: rgb(244, 108, 153);
+    margin-bottom: 10px;
+}
+
+.text-content p{
+    font-size: 1rem;
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.latest-collection-btn {
+    background-color: rgb(244, 108, 153);
+    color: white;
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@media (max-width: 1200px) {
+    .overlay-text {
+        top: 70%;
+        left: 80%; 
+    }
+
+    .text-content {
+        font-size: 1.2rem; 
+    }
+
+    .latest-collection-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem; 
+        margin-left: 0; 
+    }
+}
+  
+
+
+ */

@@ -48,5 +48,5 @@ https://create-restapi.onrender.com
 
 #### Link of the Frontend Deployment.
 
-https://expense-ease-01.netlify.app/
+https://aastha-chaudhary.netlify.app/
 

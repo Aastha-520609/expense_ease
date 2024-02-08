@@ -3,8 +3,10 @@ const mongoose = require("mongoose");
 const port = 4000;
 const app = express(); /* executes the express function */
 const path = require("path"); /* gets access to backend directory of our express app */
+const cors = require("cors");
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
+app.use(cors());
 
 /* Database connection with mongodb */
 mongoose.connect("mongodb+srv://aasthachaudhary5050:aasthaEcommerce@cluster0.4hu117e.mongodb.net/e-commerce")
@@ -14,7 +16,6 @@ app.get("/",(req,res) => {
   res.send("Express App is Running")
 })
 
-/* Need to create upload endpoint */
 
 /* Schema for creating products */
 const Product = mongoose.model("Product",{
@@ -26,10 +27,10 @@ const Product = mongoose.model("Product",{
     type:String,
     required: true,
    },
-   image:{
+  /*  image:{
     type:String,
     required:true,
-   },
+   }, */
    category:{
     type:String,
     required: true,
@@ -47,45 +48,72 @@ const Product = mongoose.model("Product",{
     default: Date.now,
    },
    available:{
-    type:boolean,
+    type: Boolean,
     default: true
    },
 })
 
 /* post request */
-app.post('/addproudct', async(req,res) => {
+app.post('/addproduct', async(req,res) => {
+/*   concept of genertating new id by default instead of manually writing it */ 
+  let products = await Product.find({});
+  let id;
+  if(products.length > 0)
+  {
+    let last_product_array = products.slice(-1);
+    let last_product = last_product_array[0];
+    id = last_product.id+1;
+  }
+  else{
+    id=1;
+  }
   const product = new Product({
-    id:req.body.id,
+    id:id,
     name:req.body.name,
-    image: req.body.image,
+    /* image: req.body.image, */
     category: req.body.category,
     new_price:req.body.new_price,
-    old_price:req.body.old_Price,
+    old_price:req.body.old_price,
   });
+
   console.log(product);
  /*  saving the product in database using await */
- await product.save();
- console.log("Saved");
- res.json({
+  await product.save();
+  /* This is execute after the product is save */
+  console.log("Saved");
+  res.json({
   success: true,
   name: req.body.name,
  })
 })
 
 /* Remove product */
-app.post('/removeproduct', async(req,res) => {
-  await Product.findOneAndDelete({id:req.body.id});
-  console.log("Removed");
-  res.json({
-    success: true,
-    name: req.body.name
-  })
-})
+app.delete('/removeproduct/:id', async (req, res) => {
+  try {
+    const productId = req.params.id; // Extract the product ID from URL parameters
+    
+    if (!productId) {
+      return res.status(400).json({ error: 'Product ID is required' });
+    }
+
+    const deletedProduct = await Product.findOneAndDelete({ id: productId });
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.json({ success: true, message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 /* Creating API for getting all products */
-
-
-
+app.get('/allproducts',async(req,res) => {
+  let products = await Product.find({});
+  console.log("All Products Fetched");
+  res.send(products);
+})
 
 app.listen(port,(error) => {
   if(!error){
@@ -102,6 +130,15 @@ app.listen(port,(error) => {
 
 /* const express = require("express");
 const mongoose = require("mongoose");
+
+app.post('/removeproduct', async(req,res) => {
+  await Product.findOneAndDelete({id:req.body.id});
+  console.log("Removed");
+  res.json({
+    success: true,
+    name: req.body.name
+  })
+})
 
 const app = express();
 const port = 3000;

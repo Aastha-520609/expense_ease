@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState} from 'react'
 import './AddProduct.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProduct = () => {
 
@@ -16,21 +18,32 @@ const AddProduct = () => {
         setProductDetails({...productDetails, [e.target.name]:e.target.value})
     }
 
-    const Add_Product = async() =>
-    {
-        let product = productDetails;
-        console.log(productDetails);
-        await fetch('http://localhost:4000/addproduct', {
-            method: 'POST',
-            headers:{
-                Accept:'application/json',
-                'Content-Type': 'application/json',   
-            },
-            body:JSON.stringify(product),
-        }).then((resp) => resp.json()).then((data) => {
-            data.success?alert("Product Added"):alert("Failed")
-        })
+    const Add_Product = async () => {
+      let product = productDetails;
+      console.log(productDetails);
+
+    try {
+      const response = await fetch('http://localhost:4000/addproduct', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Product Added");
+      } else {
+        toast.error("Failed");
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      toast.error("An error occurred while adding the product");
     }
+  };
     
   return (
     <div className = 'add-product'>

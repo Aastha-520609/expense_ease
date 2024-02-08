@@ -4,13 +4,14 @@ import { ShopContext } from '../Context/Context'
 import {useContext} from 'react'
 import dropdown_icon from '../Components/Assests/dropdown_icon.png'
 import Item from '../Components/Item/Item'
+import './CSS/Category.css'
 
 const Category = (props) => {
   const {all_product} = useContext(ShopContext)
   return (
     <div className = 'shop-category' >
-       <img src={props.banner} alt="" />
-       <div className="ShopCategoryIndex">
+       <img className = 'shopcategory-banner' src={props.banner} alt="" />
+       <div className="shopcategory-index">
         <p>
           <span> Showing 1-12 </span> out of 36 products
         </p>
@@ -27,6 +28,9 @@ const Category = (props) => {
             return null;
           }
         })}
+       </div>
+       <div className="shopcategory-loadmore">
+          Explore more
        </div>
     </div>
   )

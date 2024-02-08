@@ -4,12 +4,42 @@ const port = 4000;
 const app = express(); /* executes the express function */
 const path = require("path"); /* gets access to backend directory of our express app */
 const cors = require("cors");
+/* require("dotenv").config(); */
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
 app.use(cors());
-
+/* const port = process.env.PORT;
+ */
 /* Database connection with mongodb */
 mongoose.connect("mongodb+srv://aasthachaudhary5050:aasthaEcommerce@cluster0.4hu117e.mongodb.net/e-commerce")
+
+/* Schema for creating user */
+const Users = mongoose.model('Users',{
+  name:{
+    type: String,
+  },
+  email:{
+    type: String,
+    unique: true,
+  },
+  password:{
+    type: String,
+  },
+  cartDate:{
+    type: Object,
+  },
+  date:{
+    type:Date,
+    default: Date.now,
+  }
+ });
+
+/* creating end point for registering user  */
+app.post('/signup', async(req,res) => {
+  let check = await Users.findOne()
+})
+
+
 
 /* API Creation */
 app.get("/",(req,res) => {

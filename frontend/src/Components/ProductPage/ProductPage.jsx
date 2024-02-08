@@ -2,10 +2,16 @@ import React from 'react'
 import './ProductPage.css'
 import arrow from '../Assests/arrow.png'
 
-const ProductPage = () => {
+const ProductPage = (props) => {
+  const {product} = props;
+
+  if (!product) {
+    return <div>Loading...</div>; // or handle the loading state accordingly
+  }
+
   return (
     <div className = 'product-page'>
-      HOME <img src={arrow} alt="" /> SHOP <img src={arrow} alt="" /> {Product.category} <img src={arrow} alt="" /> {product_name}
+     
     </div>
   )
 }

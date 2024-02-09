@@ -63,6 +63,8 @@
 .already span{
     color: blueviolet;
     font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .agree{

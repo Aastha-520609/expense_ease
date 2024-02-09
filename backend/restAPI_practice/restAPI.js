@@ -5,6 +5,7 @@ const app = express(); /* executes the express function */
 const path = require("path"); /* gets access to backend directory of our express app */
 const cors = require("cors");
 /* require("dotenv").config(); */
+const jwt = require('jsonwebtoken');
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
 app.use(cors());
@@ -36,7 +37,60 @@ const Users = mongoose.model('Users',{
 
 /* creating end point for registering user  */
 app.post('/signup', async(req,res) => {
-  let check = await Users.findOne()
+  let check = await Users.findOne({email:req.body.email});
+  if(check)
+  {
+    return res.status(400).json({success:false, errors: "This email id is already registered"})
+  }
+
+  let cart = {};
+  for(let i=0; i<300; i++)
+  {
+    cart[i] = 0;
+  }
+
+  const user = new Users({
+    name: req.body.username,
+    email:req.body.email,
+    password:req.body.password,
+    cartDate:cart,
+  })
+
+  /* saving the user in database */
+  await user.save();
+
+  const data = {
+    user:{
+      id:user.id
+    }
+  }
+
+  const token = jwt.sign(data, 'secret_ecom');
+  res.json({success:true, token})
+})
+
+/* Creating endpoint for user-login */
+app.post('/login', async(req, res) => {
+  let user = await Users.findOne({email:req.body.email});
+  if(user){
+    const passCompare = req.body.password === user.password;
+    if(passCompare){
+      const data = {
+        user:{
+          id:user.id
+        }
+      }
+
+      const token = jwt.sign(data,'secret_ecom');
+      res.json({success:true, token});
+    }
+    else{
+      res.json({success:false, errors: "Password is incorrect"});
+    }
+  }
+  else{
+    res.json({success:false, errors: "Email Id is incorrect"})
+  }
 })
 
 

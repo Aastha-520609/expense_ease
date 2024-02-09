@@ -8,11 +8,11 @@
 
 .login-container{
     width: 480px;
-    height: 600px;
+    height: 580px;
     background: white;
     margin-right: auto;
     margin-left: auto;
-    padding: 8px 50px;
+    padding: 8px 40px;
     margin-top: -50px;
     border-radius: 20px;
     background-color: rgb(173, 138, 163);
@@ -46,7 +46,7 @@
     color: white;
     background: blueviolet;
     border-radius: 10px;
-    margin-top: 60px;
+    margin-top: 40px;
     border: none;
     font-size: 24px;
     font-weight: 500;

@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ShopContextProvider from './Context/Context';
+/* import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ShopContextProvider>
     <App />
+    {/* <ToastContainer /> */}
   </ShopContextProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -6,6 +6,7 @@ const Offer = () => {
   return (
     <div className = "offers">
         <img src={image} alt="" />
+        
     </div>
   )
 }

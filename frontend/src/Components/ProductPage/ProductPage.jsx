@@ -1,6 +1,6 @@
 import React from 'react'
 import './ProductPage.css'
-import arrow from '../Assests/arrow.png'
+import arrow_icon from '../Assests/arrow.png'
 
 const ProductPage = (props) => {
   const {product} = props;
@@ -11,7 +11,7 @@ const ProductPage = (props) => {
 
   return (
     <div className = 'product-page'>
-     
+      HOME <img src={arrow_icon} alt="" /> SHOP <img src={arrow_icon} alt="" /> {product.category} <img src={arrow_icon} alt="" /> {product.name}
     </div>
   )
 }

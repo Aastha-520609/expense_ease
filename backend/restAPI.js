@@ -6,6 +6,7 @@ const path = require("path"); /* gets access to backend directory of our express
 const cors = require("cors");
 /* require("dotenv").config(); */
 const jwt = require('jsonwebtoken');
+const multer = require("multer");
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
 app.use(cors());
@@ -111,10 +112,10 @@ const Product = mongoose.model("Product",{
     type:String,
     required: true,
    },
-  /*  image:{
+   image:{
     type:String,
     required:true,
-   }, */
+   },
    category:{
     type:String,
     required: true,
@@ -154,7 +155,7 @@ app.post('/addproduct', async(req,res) => {
   const product = new Product({
     id:id,
     name:req.body.name,
-    /* image: req.body.image, */
+    image: req.body.image,
     category: req.body.category,
     new_price:req.body.new_price,
     old_price:req.body.old_price,
@@ -199,6 +200,70 @@ app.get('/allproducts',async(req,res) => {
   res.send(products);
 })
 
+/* Creating endpoint for newcollection data */
+app.get('/newcollections', async (req, res) => {
+    let products = await Product.find({});
+    let newcollection = products.slice(1).slice(-8);
+    console.log("NewCollection Fetched");
+    res.send(newcollection);
+})
+
+/* Creating endpoint for popular in women category */
+app.get('/popularinwomen', async(req,res)=>{
+  let products = await Product.find({category:"women"});
+  let popular_in_women = products.slice(0,4);
+  console.log("Popular in women fetched");
+  res.send(popular_in_women);
+})
+
+/* Creating middleware to fetch user */
+const fetchUser = async (req,res,next) => {
+   const token = req.header('auth-token');
+   if(!token)
+   {
+    res.status(401).send({errors: "Invalid Token"});
+   }
+   else{
+    try{
+      const data = jwt.verify(token, 'secret_ecom');
+      req.user = data.user;
+      next();
+    }catch(error){
+        res.status(401).send({errors: "Use Valid Token"})
+    }
+   }
+}
+
+/* creating api for adding products in cartdata */
+app.post('/addtocart', fetchUser, async(req, res) => {
+
+  console.log("Added", req.body.itemId);
+  let userData = await Users.findOne({_id: req.user.id});
+  userData.cartData[req.body.itemId] += 1; 
+  await Users.findOneAndUpdate({_id:req.user.id}, {cartData:userData.cartData});
+  res.send("Added")
+})
+
+/* Creating api for removing product from cart */
+app.post('/removefromcart', fetchUser, async(req, res) => {
+  
+  console.log("removed", req.body.itemId);
+  let userData = await Users.findOne({_id: req.user.id});
+  if(userData.cartData[req.body.itemId] > 0)
+  {
+    userData.cartData[req.body.itemId] -= 1; 
+  }
+  await Users.findOneAndUpdate({_id:req.user.id}, {cartData:userData.cartData});
+  res.send("Removed")
+})
+
+/* creating api to retrive cart data */
+app.post('/getcart', fetchUser, async(req, res) => {
+  console.log("Get cart");
+  let userData = await Users.findOne({_id: req.user.id})
+  res.json(userData.cartData);
+})
+
 app.listen(port,(error) => {
   if(!error){
     console.log("Server Running on Port " + port)
@@ -208,94 +273,22 @@ app.listen(port,(error) => {
   }
 })
 
-
-
-
-
-/* const express = require("express");
-const mongoose = require("mongoose");
-
-app.post('/removeproduct', async(req,res) => {
-  await Product.findOneAndDelete({id:req.body.id});
-  console.log("Removed");
-  res.json({
-    success: true,
-    name: req.body.name
-  })
+/* Image storage engine */
+const storage = multer.diskStorage({
+  destination: './upload/images',
+  filename:(req, file, cb)=>{
+    return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+  }
 })
 
-const app = express();
-const port = 3000;
+/* upload function  - to pass the above configuration*/
+const upload = multer({storage:storage})
 
-const data = 
-
-app.use(express.json());
-
-const uri = "mongodb+srv://aasthachaudhary5050:AasthaMongo@cluster0.mnrvgwo.mongodb.net/test";
-console.log("Database connected");
-
-//creating a schema
-const Schema = new mongoose.Schema({
-        uid: Number,
-        sem1: Number,
-        sem2: Number,
-        cgpa: Number,
-  });
-
-const studentsDocument = mongoose.model("students", Schema);
-
-//get
-app.get("/students", (req,res) => {
-    res.json(students);
-});
-
-// post
-app.post("/students", (req, res) => {
-    const newStudent = req.body;
-    students.push(newStudent);
-    res.status(201).json({ message: 'Post done successful', student: newStudent });
-  });
-
-//put
-app.put('/students/:uid', (req, res) => {
-    const uid = parseInt(req.params.uid);
-    const studentIndex = students.findIndex((s) => s.uid === uid);
-
-    if (studentIndex !== -1) {
-    students[studentIndex] = req.body;
-    res.json({ message: 'Put done', student: students[studentIndex] });
-    } else {
-    res.status(404).json({ error: 'Student not found' });
-    }
-});
-
-//patch
-app.patch('/students/v1/:uid', (req, res) => {
-    const uid = parseInt(req.params.uid);
-    const student = students.find((s) => s.uid === uid);
-  
-    if (student) {
-      Object.assign(student, req.body);
-      res.json({message: 'Patch done', student });
-    } else {
-      res.status(404).json({ error: 'Student not found' });
-    }
-  });
-
-//delete
-app.delete('/students/d1/:uid', (req, res) => {
-    const uid = parseInt(req.params.uid);
-    const studentIndex = students.findIndex((s) => s.uid === uid);
-  
-    if (studentIndex !== -1) {
-      const deletedStudent = students.splice(studentIndex, 1)[0];
-      res.json({ message: 'Delete done', student: deletedStudent });
-    } else {
-      res.status(404).json({ error: 'Student not found' });
-    }
-  });   
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-}); */
+/* Creating upload endpoint for images */
+app.use('/images', express.static('upload/images'))
+app.post("/upload",upload.single(`product`),(req,res) => {
+   res.json({
+    success: 1,
+    image_url: `http://localhost:${port}/images/${req.file.filename}`
+   })
+})

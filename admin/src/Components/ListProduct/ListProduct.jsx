@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import cross_icon from '../../assets/cross_icon.png'
+import './ListProduct.css'
 
 const ListProduct = () => {
   
@@ -23,8 +24,9 @@ const delete_product = async(id) => {
         headers:{
             Accept:'application/json',
             'Content-Type': 'application/json',
-        }
-    });
+        },
+        body:JSON.stringify({id:id})
+    })
     await fetchInfo();
 }
 
@@ -32,7 +34,7 @@ const delete_product = async(id) => {
 return (
     <div className = 'list-product'>
       <h1>All Products</h1>
-      <div className="listproduct-main">
+      <div className="listproduct-format-main">
         <p>Products</p>
         <p>Title</p>
         <p>Old Price</p>
@@ -43,14 +45,17 @@ return (
       <div className="listproduct-allproducts">
         <hr />
         {allproducts.map((product, index)=>{
-            return <div key={index} className="listproduct-format-main">
+            return <>
+              <div key={index} className="listproduct-format-main listproduct-format">
+              <img src={product.image} alt="Image" className="listproduct-product-icon"  />
               <p>{product.name}</p>
               <p>${product.old_price}</p>
               <p>${product.new_price}</p>
               <p>{product.category}</p>
-              <img className = 'listproduct-remove-icon' src={cross_icon} alt="" />
-              <p onClick = {() => {delete_product(product.id)}}>Delete</p>
+              <img  onClick = {() => {delete_product(product.id)}} className = 'listproduct-remove-icon' src={cross_icon} alt="" />
             </div>
+            <hr />
+            </>
         })}
       </div>
     </div>

@@ -52,3 +52,6 @@ https://aastha-chaudhary.netlify.app/
 
 #### Link of Project Demo.
 https://flashbackconnect.com/Movie.aspx?id=wmntXy83XDnrhYbwcA0VAA2
+
+#### Link of the deployment on netlify using github repo.
+https://main--aastha-chaudhary-expense-ease.netlify.app/

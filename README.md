@@ -40,8 +40,7 @@
 ->Address user queries and concerns promptly to ensure a positive shopping experience.
 
 #### Link of the postman documentation.
-
-https://documenter.getpostman.com/view/32347993/2s9YymFj3j
+https://documenter.getpostman.com/view/32347993/2sA2r3Zkjd
 
 #### Link of the deployment before connecting it to atlas.
 https://create-restapi.onrender.com

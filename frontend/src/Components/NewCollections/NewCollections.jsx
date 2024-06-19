@@ -2,14 +2,14 @@ import React from 'react'
 import './NewCollections.css'
 import Item from '../Item/Item'
 import {useState, useEffect} from 'react'
-import new_collection from '../Assests/new_collections'
+const BASE_URL = 'https://expense-easee.onrender.com';
 
 const NewCollections = () => {
  
   const [new_collection, setNew_collection] = useState([]); 
 
    useEffect(() => {
-   fetch('http://localhost:4000/newcollections')
+   fetch(`${BASE_URL}/newcollections`)
    .then((response)=>response.json())
    .then((data) => setNew_collection(data));
   },[]) 
@@ -20,7 +20,7 @@ const NewCollections = () => {
         <hr />
         <div className="collections">
            {new_collection.map((item,i)=>{
-              return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+              return <Item key={i} id={item.id} name={item.name} image={`${BASE_URL}/images/${item.image}`} new_price={item.new_price} old_price={item.old_price} />
            })}
         </div>
     </div>

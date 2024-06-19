@@ -1,25 +1,99 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import cross_icon from '../../assets/cross_icon.png';
+import './ListProduct.css';
+
+const BASE_URL = 'https://expense-easee.onrender.com';
+
+const ListProduct = () => {
+    const [allproducts, setAllProducts] = useState([]);
+
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/allproducts`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch products');
+            }
+            const data = await response.json();
+            setAllProducts(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const deleteProduct = async (id) => {
+        try {
+            await fetch(`${BASE_URL}/removeproduct/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: id }),
+            });
+            // After deletion, fetch products again to update the list
+            fetchProducts();
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
+
+    return (
+        <div className='list-product'>
+            <h1>All Products</h1>
+            <div className='listproduct-format-main'>
+                <p>Products</p>
+                <p>Title</p>
+                <p>Old Price</p>
+                <p>New Price</p>
+                <p>Category</p>
+                <p>Remove</p>
+            </div>
+            <div className='listproduct-allproducts'>
+                <hr />
+                {allproducts.map((product, index) => (
+                    <div key={index} className='listproduct-format-main listproduct-format'>
+                        <img src={`${BASE_URL}/images/${product.image}`} alt='Product' className='listproduct-product-icon' />
+                        <p>{product.name}</p>
+                        <p>${product.old_price}</p>
+                        <p>${product.new_price}</p>
+                        <p>{product.category}</p>
+                        <img onClick={() => deleteProduct(product.id)} className='listproduct-remove-icon' src={cross_icon} alt='Remove' />
+                    </div>
+                ))}
+                <hr />
+            </div>
+        </div>
+    );
+};
+
+export default ListProduct;
+
+/* import React from 'react'
 import {useState, useEffect} from 'react'
 import cross_icon from '../../assets/cross_icon.png'
 import './ListProduct.css'
+const BASE_URL = 'https://expense-easee.onrender.com';
 
 const ListProduct = () => {
   
   const [allproducts, setAllProducts] = useState([]);
 
   const fetchInfo = async ()=> {
-     await fetch('http://localhost:4000/allproducts')
+     await fetch(`${BASE_URL}/allproducts`)
      .then((res) => res.json())
      .then((data) => {setAllProducts(data)});
   }
 
-/*  to run fetchinfo whenever its mounted  */
 useEffect(() =>{
     fetchInfo();
 },[])
 
 const delete_product = async(id) => {
-    await fetch(`http://localhost:4000/removeproduct/${id}`,{
+    await fetch(`${BASE_URL}/removeproduct/${id}`,{
         method:'DELETE',
         headers:{
             Accept:'application/json',
@@ -47,7 +121,7 @@ return (
         {allproducts.map((product, index)=>{
             return <>
               <div key={index} className="listproduct-format-main listproduct-format">
-              <img src={product.image} alt="Image" className="listproduct-product-icon"  />
+              <img src={`${BASE_URL}/images/${product.image}`} alt='Product' className='listproduct-product-icon' />
               <p>{product.name}</p>
               <p>${product.old_price}</p>
               <p>${product.new_price}</p>
@@ -62,4 +136,5 @@ return (
   )
 }
 
-export default ListProduct
+export default ListProduct;
+ */

@@ -3,24 +3,26 @@ import './Popular.css'
 import Item from '../Item/Item'
 import {useState, useEffect} from 'react'
 import popularProducts from '../Assests/data'
+const BASE_URL = 'https://expense-easee.onrender.com';
+
 
 const Popular = () => {
 
   /* const [popularProducts, setPopularProducts] = useState([]);
  
   useEffect(()=> {
-     fetch('http://localhost:4000/popularinwomen')
+     fetch(`${BASE_URL}/popularinwomen`)
      .then((response) => response.json())
      .then((data) => setPopularProducts(data));
-  },[]) */
-
+  },[])
+ */
   return (
     <div className='popular'>
        <h1>POPULAR IN WOMEN</h1>
        <hr/>
        <div className="popular-item">
          {popularProducts.map((item,i)=> {
-            return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+            return <Item key={i} id={item.id} name={item.name} image={`${BASE_URL}/images/${item.image}`} new_price={item.new_price} old_price={item.old_price} />
          })}
        </div>
     </div>

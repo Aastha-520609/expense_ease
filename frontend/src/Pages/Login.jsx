@@ -3,6 +3,7 @@ import './CSS/Login.css'
 import { useState } from 'react';
 /* import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; */
+const BASE_URL = 'https://expense-easee.onrender.com';
 
 const Login = () => {
 
@@ -24,7 +25,7 @@ const Login = () => {
  const login = async() => {
   console.log("Login successful", formData);
   let responseData;
-  await fetch('http://localhost:4000/login',{
+  await fetch(`${BASE_URL}/login`,{
     method: "POST",
     headers:{
       Accept: 'application/form-data',
@@ -46,7 +47,7 @@ const Login = () => {
  const signup = async() => {
   console.log("Sign Up successful",formData);
   let responseData;
-  await fetch('http://localhost:4000/signup',{
+  await fetch(`${BASE_URL}/signup`,{
     method: "POST",
     headers:{
       Accept: 'application/form-data',

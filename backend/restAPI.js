@@ -155,7 +155,7 @@ app.post('/addproduct', async(req,res) => {
   const product = new Product({
     id:id,
     name:req.body.name,
-    image: req.body.image,
+    image: req.file.filename,
     category: req.body.category,
     new_price:req.body.new_price,
     old_price:req.body.old_price,
@@ -168,7 +168,7 @@ app.post('/addproduct', async(req,res) => {
   console.log("Saved");
   res.json({
   success: true,
-  name: req.body.name,
+  name: req.file.filename,
  })
 })
 
@@ -194,12 +194,19 @@ app.delete('/removeproduct/:id', async (req, res) => {
 });
 
 /* Creating API for getting all products */
-app.get('/allproducts',async(req,res) => {
-  let products = await Product.find({});
-  console.log("All Products Fetched");
-  res.send(products);
-})
-
+app.get('/allproducts', async (req, res) => {
+  try {
+      let products = await Product.find({});
+      products = products.map(product => ({
+          ...product._doc,
+          image: `${BASE_URL}/images/${product.image}`
+      }));
+      res.json(products);
+  } catch (error) {
+      console.error('Error fetching all products:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
 /* Creating endpoint for newcollection data */
 app.get('/newcollections', async (req, res) => {
     let products = await Product.find({});
@@ -277,15 +284,15 @@ app.listen(port,(error) => {
 const storage = multer.diskStorage({
   destination: './upload/images',
   filename:(req, file, cb)=>{
-    return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+     cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
   }
-})
+});
 
 /* upload function  - to pass the above configuration*/
-const upload = multer({storage:storage})
+const upload = multer({ storage });
 
 /* Creating upload endpoint for images */
-app.use('/images', express.static('upload/images'))
+app.use('/images', express.static('upload/images'));
 app.post("/upload",upload.single(`product`),(req,res) => {
    res.json({
     success: 1,

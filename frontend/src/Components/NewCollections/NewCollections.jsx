@@ -12,7 +12,7 @@ const NewCollections = () => {
    fetch(`${BASE_URL}/newcollections`)
    .then((response)=>response.json())
    .then((data) => setNew_collection(data));
-  },[]) 
+  },[]);
 
   return (
     <div className='new-collections'>
@@ -24,7 +24,7 @@ const NewCollections = () => {
            })}
         </div>
     </div>
-  )
+  );
 }
 
 export default NewCollections

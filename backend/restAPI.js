@@ -10,7 +10,7 @@ const multer = require("multer");
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
 app.use(cors({
-  origin: '*', // Allow all origins, or specify the origin your frontend is hosted on
+  origin: 'https://aastha-chaudhary.netlify.app/', // Allow all origins, or specify the origin your frontend is hosted on
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials if necessary
   allowedHeaders: 'Content-Type,Authorization'
@@ -18,7 +18,12 @@ app.use(cors({
 /* const port = process.env.PORT;
  */
 /* Database connection with mongodb */
-mongoose.connect("mongodb+srv://aasthachaudhary5050:aasthaEcommerce@cluster0.4hu117e.mongodb.net/e-commerce")
+mongoose.connect("mongodb+srv://aasthachaudhary5050:aasthaEcommerce@cluster0.4hu117e.mongodb.net/e-commerce",{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
 
 /* Schema for creating user */
 const Users = mongoose.model('Users',{
@@ -290,7 +295,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})
 
 /* Creating upload endpoint for images */
-app.use('/images', express.static('upload/images'))
+app.use('/images', express.static('upload/images'));
 app.post("/upload",upload.single(`product`),(req,res) => {
    res.json({
     success: 1,

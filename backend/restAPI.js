@@ -9,7 +9,12 @@ const jwt = require('jsonwebtoken');
 const multer = require("multer");
 
 app.use(express.json());/*  request we get from response will automatically parse through json */
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins, or specify the origin your frontend is hosted on
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow credentials if necessary
+  allowedHeaders: 'Content-Type,Authorization'
+}));
 /* const port = process.env.PORT;
  */
 /* Database connection with mongodb */
@@ -292,3 +297,11 @@ app.post("/upload",upload.single(`product`),(req,res) => {
     image_url: `https://expense-easee.onrender.com/images/${req.file.filename}`
    })
 })
+
+app.listen(port, (error) => {
+  if (!error) {
+    console.log("Server Running on Port " + port);
+  } else {
+    console.log("Error: " + error);
+  }
+});

@@ -15,12 +15,14 @@ const BASE_URL = process.env.BASE_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(express.json());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN, // Allow all origins, or specify the origin your frontend is hosted on
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN.split(','), // Split multiple origins into an array
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials if necessary
   allowedHeaders: 'Content-Type,Authorization'
-}));
+};
+
+app.use(cors(corsOptions));
 
 // Database connection
 mongoose.connect(MONGODB_URI, {

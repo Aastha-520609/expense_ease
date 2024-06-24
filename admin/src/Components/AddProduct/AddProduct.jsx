@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './AddProduct.css';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import upload_area from '../../assets/upload_area.svg';
 
 const BASE_URL = 'https://expense-easee.onrender.com';
 
 const AddProduct = () => {
-    const [image, setImage] = useState(null); // State to hold the selected image file
+    const [image, setImage] = useState(false); // State to hold the selected image file
 
     const [productDetails, setProductDetails] = useState({
         name: '',
@@ -28,7 +26,7 @@ const AddProduct = () => {
     };
 
     // Function to add a new product
-    const addProduct = async () => {
+    const Add_Product = async () => {
         try {
             const formData = new FormData();
             formData.append('product', image); // Append the selected image file to FormData
@@ -107,7 +105,7 @@ const AddProduct = () => {
                 </label>
                 <input onChange={imageHandler} type='file' name='image' id='file-input' hidden />
             </div>
-            <button onClick={addProduct} className='addproduct-btn'>
+            <button onClick={() => {Add_Product()}} className='addproduct-btn'>
                 Add
             </button>
         </div>

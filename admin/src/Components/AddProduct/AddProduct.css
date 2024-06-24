@@ -48,8 +48,8 @@
    height: 120px;
    width: 120px;
    border-radius: 10px;
-   object-fit: contain;   
-   margin: 20px 0px;
+   object-fit: contain;  
+   margin: 10px 0px;
 }
 
 .addproduct-btn{

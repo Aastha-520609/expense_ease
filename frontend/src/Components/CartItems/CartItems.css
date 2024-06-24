@@ -10,7 +10,7 @@
 
 .cartitems-format-main{
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.2fr 2fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 75px;
     padding: 20px 0px;
@@ -95,15 +95,82 @@
     outline: none;
     background: transparent;
     font-size: 16px;
-    width: 330px;
-    height: 50px;
+    width: 230px;
+    height: 20px;
 }
 
 .cartitems-promobox button{
-    width: 170px;
+    margin-left: 104px;
+    width: 150px;
     height: 58px;
     font-size: 16px;
     background: black;
     color: white;
     cursor: pointer;
+}
+
+@media(max-width: 1280px)
+{
+    .cartitems{
+        margin: 60px 50px;
+    }
+    .cartitems-format-main{
+        font-size: 15px;
+    }
+    .cartitems-total h1{
+        font-size: 25px;
+    }
+    .cartitems-down button{
+        width: 162px;
+        height: 48px;
+        font-size: 14px;
+    }
+    .cartitems-quantity{
+        width: 40px;
+        height: 30px;
+    }
+    .cartitems-down{
+        margin: 80px 0px;
+        flex-direction: column;
+        gap: 80px;
+    }
+    .cartitems-total{
+        margin: 0;
+    }
+    .cartitems-promobox button{
+        margin-left: 104px;
+        width: 150px;
+        height: 58px;
+        font-size: 16px;
+    }
+    .cartitems-promocode{
+        margin-bottom: 50px;
+    }
+}
+@media(max-width:800px)
+{
+    .cartitems{
+        margin: 50px 40px;
+    }
+    .cartitems-format-main{
+        font-size: 12px;
+        gap: 20px;
+    }
+    .cartitems-promocode{
+        margin-bottom: 100px;
+        margin-top: -20px;
+    }
+}
+
+@media(max-width: 500px)
+{
+    .name{
+      font-size: 10px;
+    }
+    .cartitems-promocode{
+        width: 450px;
+    }
+    .cartitems-promobox button{
+        margin-left: 17px;
+    }
 }

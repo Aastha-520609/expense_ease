@@ -1,10 +1,10 @@
 .productdisplay{
   display: flex;
-  margin: 0px 170px;   
-  margin-bottom: 150px;
+  margin: 0 170px;
+ /*  margin-bottom: 150px; */
 }
 
-.productdisplay-left{
+ .productdisplay-left{
     display: flex;
     gap: 17px;
 }
@@ -16,22 +16,23 @@
 }
 
 .productdisplay-img-list img{
-    height: 153px;
+    height: 138px;
 }
 
 .productdisplay-main-img{
-   width:   586px;
+   width: 100%;
+   height: 600px;
 }
 
 .productdisplay-right{
-    margin: 0px 70px;
+    margin: 0 70px;
     display: flex;
     flex-direction: column;
 }
 
 .productdisplay-right h1{
   color: #3d3d3d;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -41,14 +42,14 @@
     margin-top: 13px;
     gap: 5px;
     color: #1c1c1c;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .product-prices{
     display: flex;
-    margin: 40px 0px;
+    margin: 20px 0px;
     gap: 30px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
 }
 
@@ -62,7 +63,7 @@
 }
 
 .product-size h1{
-   margin-top: 55px;
+   margin-top: 25px;
    color: #656565;
    font-size: 20px;
    font-weight: 600;
@@ -83,7 +84,7 @@
 }
 
 .productdisplay-right button{
-    padding: 20px 40px;
+    padding: 15px 30px;
     width: 200px;
     font-size: 16px;
     font-weight: 600;
@@ -96,9 +97,145 @@
 }
 
 .productdisplay-right-category{
-   margin-top: 10px;
+   margin-top: 3px;
 }
 
 .productdisplay-right-category span{
     font-weight: 600;
+}
+@media(max-width: 1280px)
+{
+    .productdisplay{
+        margin: 0px 80px;
+    }
+    .productdisplay-left{
+        gap: 10px;
+    }
+    .productdisplay-img-list{
+        gap: 10px;
+    }
+    .productdisplay-img-list img{
+        height: 120px;
+    }
+    .productdisplay-main-img{
+        width: auto;
+        height: 510px;
+    }
+    .productdisplay-right{
+        margin: 0px 30px;
+    }
+
+    .productdisplay-right h1{
+        margin-left: 20px;
+    }
+    .productdisplay-main-img h1{
+        font-size: 22px;
+    }
+    .productdisplay-right-stars{
+        gap: 3px;
+        font-size: 13px;
+    }
+    .product-prices{
+        font-size: 18px;
+        margin-top: -10px;
+        margin-left: -16px;
+        gap: 0px;
+    }
+    .product-description{
+        margin-top: -40px;
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    .product-size h1{
+        margin-top: -8px;
+        font-size: 20px;
+        margin-left: 5px;
+    }
+    .productdisplay-right div{
+        padding: 14px 20px;
+    }
+    .select-size{
+        margin-top: 15px;
+    }
+    .productdisplay button{
+        margin-left: 22px;
+        margin-top: -15px;
+    }
+    .productdisplay-right-category{
+        margin-left: 22px;
+        margin-top: 1px;
+    }
+}
+@media(max-width: 1024px)
+{
+    .productdisplay-img-list img{
+        height: 120px;
+    }
+    .productdisplay-main-img{
+        width: 100%;
+        height: 510px;
+    }
+}
+@media(max-width: 800px)
+{
+    .productdisplay{
+        margin: 0px 50px;
+    }
+    .productdisplay-left{
+        gap: 0px;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .productdisplay-img-list{
+        flex-direction: row;
+        gap:3px;
+    }
+    .productdisplay-img-list img{
+        height: 80px;
+    }
+    .productdisplay-main-img{
+        height: 450px;
+    }
+}
+
+@media(max-width: 500px)
+{
+    .productdisplay{
+        flex-direction: column;
+    }
+    .productdisplay-left{
+        gap: 9px;
+        flex-direction: row;
+        margin: auto;
+    }
+    .productdisplay-img-list{
+        flex-direction: column;
+        gap: 6px;
+    }
+    .productdisplay-main-img{
+        height: 340px;
+    }
+    .productdisplay-right{
+        margin: 5px;
+    }
+    .productdisplay-right h1{
+        margin-top: 15px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .productdisplay-right-stars img{
+        width: 15px;  
+    }
+    .productdisplay-right-stars{
+        margin-top: 0px;
+    }
+    .product-prices{
+        margin-top: -25px;
+    }
+    .product-description{
+        margin-top: -px;
+    }
+    .product-size h1{
+        margin-top: -10px;
+    }
 }

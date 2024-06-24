@@ -23,7 +23,7 @@ const CartItems = () => {
             return  <div>
             <div className="cartitem-format cartitems-format-main">
                 <img src={e.image} alt="" className='carticon-product-icon' />
-                <p>{e.name}</p>
+                <p className = 'name'>{e.name}</p>
                 <p>${e.new_price}</p>
                 <button className='cartitems-quantity'>{cartItems[e.id]}</button>
                 <p>${e.new_price*cartItems[e.id]}</p>

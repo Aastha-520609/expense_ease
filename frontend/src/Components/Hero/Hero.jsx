@@ -1,20 +1,22 @@
 import React from 'react'
 import './Hero.css'
-import main_img from '../Assests/header.jpg'
+import hero_image from '../Assests/hero_image.png'
 
 const Hero = () => {
   return (
     <div className='hero'>
-      <img src={main_img} alt="" />
-      <div className="overlay-text">
-        <div className="text-content">
+      <div className = "hero-left">
             <h1>StyleSphere</h1>
-            <h3>Your Stylish Beginning Awaits</h3>
+            <h2>Your Stylish Beginning Awaits</h2>
             <p>Unleash Your Shopaholic Instincts. Elevate Your Style with our Ultimate Shopping Experience! Discover curated fashion, exclusive deals,
                and personalized recommendations. Your style revolution starts here with StyleSphere</p>
-            <button className="latest-collection-btn">SHOP NOW</button>
-        </div>
-    </div>
+               <div>
+                   <button className="latest-collection-btn">SHOP NOW</button>
+               </div>
+      </div>
+      <div className = "hero-right">
+        <img src={hero_image} alt="image" />
+      </div>
    </div> 
   )
 }

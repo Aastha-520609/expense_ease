@@ -34,7 +34,6 @@ const ListProduct = () => {
                 },
                 body: JSON.stringify({ id: id }),
             });
-            // After deletion, fetch products again to update the list
             fetchProducts();
         } catch (error) {
             console.error('Error deleting product:', error);

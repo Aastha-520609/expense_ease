@@ -21,7 +21,7 @@ const ShopContextProvider = (props) => {
         fetch(`${BASE_URL}/allproducts`)
         .then((response)=> response.json())
         .then((data)=> setAll_Product(data))
-
+    
         if(localStorage.getItem('auth-token'))
         {
             fetch(`${BASE_URL}/getcart`,{
@@ -52,6 +52,7 @@ const ShopContextProvider = (props) => {
         .then((response) => response.json())
         .then((data) => console.log(data));
     }
+   console.log(cartItems);
    }
 
    const removeFromCart = (itemId) => {

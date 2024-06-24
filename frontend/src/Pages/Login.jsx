@@ -1,26 +1,20 @@
 import React from 'react'
 import './CSS/Login.css'
 import { useState } from 'react';
-/* import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; */
 const BASE_URL = 'https://expense-easee.onrender.com';
 
 const Login = () => {
 
   const [state, setState] = useState("Login");
-  /* state for saving input field data */
   const [formData, setFormData] = useState({
     username: "",
     password:"",
     email:""
   })
 
- /*  getting the data from the input field */
  const changeHandler = (e) =>{
     setFormData({...formData,[e.target.name]: e.target.value})
  }
-
- /*  Adding API for login/signup page */
   
  const login = async() => {
   console.log("Login successful", formData);
@@ -36,7 +30,6 @@ const Login = () => {
 
   if(responseData.success){
     localStorage.setItem('auth-token', responseData.token);
-    /* sending user to homepage */
     window.location.replace("/");
   }
   else{
@@ -58,7 +51,6 @@ const Login = () => {
 
   if(responseData.success){
     localStorage.setItem('auth-token', responseData.token);
-    /* sending user to homepage */
     window.location.replace("/");
   }
   else{

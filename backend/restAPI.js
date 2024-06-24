@@ -296,6 +296,21 @@ app.post("/upload", upload.single('product'), (req, res) => {
   }
 });
 
+//endpoint for new collection
+app.get('/newcollections', async(req,res) => {
+  let products = await Product.find({});
+  let newcollection = products.slice(1).slice(-8);
+  console.log("NewCollection Fetched");
+  res.send(newcollection);
+})
+
+//endpoint for popular in women
+app.get('/popularinwomen', async(req, res) => {
+  let products = await Product.find({category: "women"});
+  let popular_in_women = products.slice(0,4);
+  console.log("Popular in women fetched");
+  res.send(popular_in_women);
+})
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

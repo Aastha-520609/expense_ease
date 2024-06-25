@@ -162,6 +162,7 @@ const Product = mongoose.model("Product", {
 // Endpoint for adding a new product
 app.post('/addproduct', async (req, res) => {
   try {
+    console.log('Received request to add product:', req.body);
     let products = await Product.find({});
     let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
 
@@ -290,7 +291,9 @@ app.post("/upload", upload.single('product'), (req, res) => {
   try {
     res.json({
       success: 1,
-      image_url: `${BASE_URL}/images/${req.file.filename}`
+      image:{
+        url:  `${BASE_URL}/images/${req.file.filename}`
+      }
     });
   } catch (error) {
     console.error('Error uploading image:', error);

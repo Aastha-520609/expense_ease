@@ -5,7 +5,7 @@ const BASE_URL = 'https://expense-easee.onrender.com';
 
 const AddProduct = () => {
 
-    const [image, setImage] = useState(false);
+    const [image, setImage] = useState(null);
     const [productDetails, setProductDetails] = useState({
         name: '',
         image: '',
@@ -23,10 +23,9 @@ const AddProduct = () => {
     };
 
     const Add_Product = async () => {
-        console.log(productDetails); // Logging product details before sending the request
         try {
             let formData = new FormData();
-            formData.append('product', image); // Append the selected image file to FormData
+            formData.append('product', image);
     
             const uploadResponse = await fetch(`${BASE_URL}/upload`, {
                 method: 'POST',
@@ -39,27 +38,23 @@ const AddProduct = () => {
     
             const responseData = await uploadResponse.json();
     
-            if (responseData.success) {
-                // Update productDetails with the received image URL
+            if (responseData.success && responseData.image_url) {
                 const updatedProductDetails = {
                     ...productDetails,
-                    image: responseData.image.url, // Assuming your backend sends the image URL in this format
+                    image: responseData.image_url, 
                 };
-    
-                // Update the state with new product details
                 setProductDetails(updatedProductDetails);
-                console.log(updatedProductDetails); // Logging updated product details
-    
-                // Optionally, you can add further logic here, such as submitting the entire product details to another API endpoint
+                console.log(updatedProductDetails);
+                alert('Image uploaded successfully!');
             } else {
                 throw new Error('Failed to upload image');
             }
         } catch (error) {
-            console.error('Error adding product:', error); // Logging error message if something goes wrong
-            // Handle error (e.g., display an error message to the user)
+            console.error('Error adding product:', error);
+            alert('Failed to upload image. Please try again.'); // Optional: Provide user feedback
         }
     };
-
+    
     return (
         <div className='add-product'>
             <div className='addproduct-itemfield'>
@@ -90,7 +85,7 @@ const AddProduct = () => {
                 </label>
                 <input onChange={imageHandler} type='file' name='image' id='file-input' hidden />
             </div>
-            <button onClick={() => {Add_Product()}} className='addproduct-btn'>
+            <button onClick={Add_Product} className='addproduct-btn'>
                 Add
             </button>
         </div>

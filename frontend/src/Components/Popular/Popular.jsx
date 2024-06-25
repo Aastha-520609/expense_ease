@@ -10,22 +10,11 @@ const Popular = () => {
 
   const [popularProducts, setPopularProducts] = useState([]);
  
-  useEffect(() => {
-    fetch(`${BASE_URL}/popularinwomen`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch popular products');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Popular products fetched:', data); // Check the fetched data in console
-        setPopularProducts(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching popular products:', error);
-      });
-  }, []);
+  useEffect(()=> {
+     fetch(`${BASE_URL}/popularinwomen`)
+     .then((response) => response.json())
+     .then((data) => setPopularProducts(data));
+  },[])
  
   return (
     <div className='popular'>

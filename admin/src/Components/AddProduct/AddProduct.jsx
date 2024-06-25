@@ -26,32 +26,57 @@ const AddProduct = () => {
         try {
             let formData = new FormData();
             formData.append('product', image);
-    
+
             const uploadResponse = await fetch(`${BASE_URL}/upload`, {
                 method: 'POST',
                 body: formData,
             });
-    
+
             if (!uploadResponse.ok) {
                 throw new Error('Failed to upload image');
             }
-    
+
             const responseData = await uploadResponse.json();
-    
-            if (responseData.success && responseData.image_url) {
+
+            if (responseData.success && responseData.image && responseData.image.url) {
+                // Update productDetails to include image URL
                 const updatedProductDetails = {
                     ...productDetails,
-                    image: responseData.image_url, 
+                    image: responseData.image.url, // Use uploaded image URL here
                 };
-                setProductDetails(updatedProductDetails);
-                console.log(updatedProductDetails);
-                alert('Image uploaded successfully!');
+
+                // Send product details to backend for saving
+                const addProductResponse = await fetch(`${BASE_URL}/addproduct`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedProductDetails),
+                });
+
+                if (!addProductResponse.ok) {
+                    throw new Error('Failed to add product');
+                }
+
+                const addProductData = await addProductResponse.json();
+                console.log('Product added successfully:', addProductData);
+
+                // Optionally clear form after successful addition
+                setProductDetails({
+                    name: '',
+                    image: '',
+                    category: 'Women',
+                    new_price: '',
+                    old_price: '',
+                });
+
+                alert('Product added successfully!');
             } else {
                 throw new Error('Failed to upload image');
             }
         } catch (error) {
             console.error('Error adding product:', error);
-            alert('Failed to upload image. Please try again.'); // Optional: Provide user feedback
+            alert('Failed to add product. Please try again.');
         }
     };
     

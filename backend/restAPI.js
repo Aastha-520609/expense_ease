@@ -207,7 +207,7 @@ app.delete('/removeproduct/:id', async (req, res) => {
 // Endpoint for fetching all products
 app.get('/allproducts', async (req, res) => {
   try {
-    const  products = await Product.find({},{ _id: 0, __v: 0 });
+    const  products = await Product.find({});
     console.log("All Products Fetched");
     res.json(products);
   } catch (error) {

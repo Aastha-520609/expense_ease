@@ -21,57 +21,80 @@ const ShopContextProvider = (props) => {
         fetch(`${BASE_URL}/allproducts`)
         .then((response)=> response.json())
         .then((data)=> setAll_Product(data))
-    
-        if(localStorage.getItem('auth-token'))
+        .catch(error => console.error('Error fetching products:', error));
+
+        const authToken = localStorage.getItem('auth-token');
+        if(authToken)
         {
             fetch(`${BASE_URL}/getcart`,{
                 method: 'POST',
                 headers:{
-                    Accept:'application/form-data',
-                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'auth-token': authToken,
                     'Content-Type' : 'application/json',
                 },
-                body:"",
+                body: JSON.stringify({})
             }).then((response)=>response.json())
-            .then((data)=>setCartItems(data));
+            .then((data)=>setCartItems(data))
+            .catch(error => console.error('Error fetching cart items:', error));
         }
-    },[])
+    },[]);
  
     const addToCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]: prev[itemId]+1}));
-    if(localStorage.getItem('auth-token')){
+
+    const authToken = localStorage.getItem('auth-token');
+    if(authToken){
         fetch(`${BASE_URL}/addtocart`,{
             method: 'POST',
             headers:{
-                Accept:'application/form-data',
-                'auth-token':`${localStorage.getItem('auth-token')}`,
+                'auth-token': authToken,
                 'Content-Type':'application/json',
             },
-            body:JSON.stringify({"itemId" : itemId}),
+            body:JSON.stringify({itemId : itemId}),
         })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Add to cart response:', data);
+        })
+        .catch((error) => {
+            console.error('Error adding to cart:', error);
+        });
     }
-   console.log(cartItems);
-   }
+   };
 
    const removeFromCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]: prev[itemId]-1}));
-    if(localStorage.getItem('auth-token'))
+
+    const authToken = localStorage.getItem('auth-token');
+    if(authToken)
     {
         fetch(`${BASE_URL}/removefromcart`,{
             method: 'POST',
             headers:{
-                Accept:'application/form-data',
-                'auth-token':`${localStorage.getItem('auth-token')}`,
+                'auth-token': authToken,
                 'Content-Type':'application/json',
             },
-            body:JSON.stringify({"itemId" : itemId}),
+            body:JSON.stringify({itemId : itemId})
         })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Remove from cart response:', data);
+        })
+        .catch((error) => {
+            console.error('Error removing from cart:', error);
+        });
     }
-   }
+   };
 
    const getTotalCartAmount = () => {
       let totalAmount = 0;

@@ -16,10 +16,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(express.json());
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // Split multiple origins into an array
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials if necessary
-  allowedHeaders: 'Content-Type,Authorization'
+  allowedHeaders: ['Content-Type,Authorization,auth-token']
 };
 
 app.use(cors(corsOptions));

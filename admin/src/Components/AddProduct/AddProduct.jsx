@@ -7,11 +7,11 @@ const AddProduct = () => {
 
     const [image, setImage] = useState(null);
     const [productDetails, setProductDetails] = useState({
-        name: '',
-        image: '',
-        category: 'Women',
-        new_price: '',
-        old_price: '',
+        name: "",
+        image: "",
+        category: "women",
+        new_price: "",
+        old_price: "",
     });
 
     const imageHandler = (e) => {
@@ -60,15 +60,6 @@ const AddProduct = () => {
 
                 const addProductData = await addProductResponse.json();
                 console.log('Product added successfully:', addProductData);
-
-                // Optionally clear form after successful addition
-                setProductDetails({
-                    name: '',
-                    image: '',
-                    category: 'Women',
-                    new_price: '',
-                    old_price: '',
-                });
 
                 alert('Product added successfully!');
             } else {

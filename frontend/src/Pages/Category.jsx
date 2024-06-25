@@ -8,28 +8,32 @@ import Item from '../Components/Item/Item'
 
 const Category = (props) => {
   const {all_product} = useContext(ShopContext);
+  console.log('All Products:', all_product);
+
+  const filteredProducts = all_product.filter(item => item.category === props.category);
+
+  console.log('Filtered Products:', filteredProducts); 
 
   return (
     <div className = 'shop-category' >
        <img className = 'shopcategory-banner' src={props.banner} alt="" />
        <div className="shopcategory-index">
         <p>
-          <span> Showing 1-12 </span> out of 36 products
+        <span> Showing {filteredProducts.length} out of {all_product.length} products </span>
         </p>
         <div className="sort-by-category">
            Sort by <img src={dropdown_icon} alt="" />
         </div>
        </div>
        <div className="shopcategory-products">
-        {all_product && all_product.map((item,i) =>{
-          if(props.category===item.category){
-            return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
-          }
-          else{
-            return null;
-          }
-        })}
-       </div>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((item, i) => (
+            <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+          ))
+        ) : (
+          <p>No products found in this category.</p>
+        )}
+      </div>
        <div className="shopcategory-loadmore">
           Explore more
        </div>

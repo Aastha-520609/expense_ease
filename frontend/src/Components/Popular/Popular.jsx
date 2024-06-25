@@ -2,7 +2,6 @@ import React from 'react'
 import './Popular.css'
 import Item from '../Item/Item'
 import {useState, useEffect} from 'react'
-import popularProducts from '../Assests/data'
 const BASE_URL = 'https://expense-easee.onrender.com';
 
 
@@ -25,7 +24,7 @@ const Popular = () => {
             return <Item key={i} 
             id={item.id} 
             name={item.name} 
-            image={`${BASE_URL}/images/${item.image}`}
+            image={`${item.image}`}
             new_price={item.new_price} 
             old_price={item.old_price} 
             />

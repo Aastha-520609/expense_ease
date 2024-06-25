@@ -309,13 +309,20 @@ app.get('/newcollections', async(req,res) => {
   res.send(newcollection);
 })
 
+//let popular_in_women = products.slice(0,4);
+
 //endpoint for popular in women
 app.get('/popularinwomen', async(req, res) => {
-  let products = await Product.find({category: "women"});
-  let popular_in_women = products.slice(0,4);
-  console.log("Popular in women fetched");
-  res.send(popular_in_women);
-})
+  try {
+    let products = await Product.find({category: "women"}).limit(4);
+    console.log("Popular in women fetched");
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching popular products:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

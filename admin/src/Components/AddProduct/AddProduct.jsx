@@ -61,14 +61,12 @@ const AddProduct = () => {
                 console.log('Product added successfully:', addProductData);
 
                 alert('Product added successfully!');
-                window.location.reload(); 
             } else {
                 throw new Error('Failed to upload image');
             }
         } catch (error) {
             console.error('Error adding product:', error);
             alert('Failed to add product. Please try again.');
-            window.location.reload(); 
         }
     };
     

@@ -40,13 +40,17 @@
 ->Address user queries and concerns promptly to ensure a positive shopping experience.
 
 #### Link of the postman documentation.
+https://documenter.getpostman.com/view/32347993/2sA2r3Zkjd
 
-https://documenter.getpostman.com/view/32347993/2s9YymFj3j
-
-#### Link of the deployment before connecting it to atlas.
-https://create-restapi.onrender.com
+#### Link of the render deployment.
+https://expense-easee.onrender.com/
 
 #### Link of the Frontend Deployment.
 
 https://aastha-chaudhary.netlify.app/
 
+#### Link of Project Demo.
+https://flashbackconnect.com/Movie.aspx?id=wmntXy83XDnrhYbwcA0VAA2
+
+#### Link of the deployment on netlify using github repo.
+https://main--aastha-chaudhary-expense-ease.netlify.app/

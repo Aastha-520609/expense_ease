@@ -1,6 +1,6 @@
 import React from 'react'
 import './Navbar.css'
-import logo from '../Assests/logo.jpg'
+import logo from '../Assests/Logo.png'
 import cart from '../Assests/cart.png'
 import hamburgerIcon from '../Assests/hamburger.png';
 import crossIcon from '../Assests/cross.png';

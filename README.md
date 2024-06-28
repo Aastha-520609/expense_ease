@@ -1,5 +1,17 @@
 ##StyleSphere
 
+#### Link of the Frontend Deployment.
+https://aastha-chaudhary.netlify.app/
+
+#### Link of the Admin Deployment.
+https://adminstrationportal.netlify.app/
+
+#### Link of the render deployment.
+https://expense-easee.onrender.com/
+
+#### Link of the postman documentation.
+https://documenter.getpostman.com/view/32347993/2sA2r3Zkjd
+
 ###List of Features:
 
 ####Clothing Category Navigation:
@@ -39,18 +51,4 @@
 ->Offer customer support channels such as live chat, email, or phone for assistance.
 ->Address user queries and concerns promptly to ensure a positive shopping experience.
 
-#### Link of the postman documentation.
-https://documenter.getpostman.com/view/32347993/2sA2r3Zkjd
 
-#### Link of the render deployment.
-https://expense-easee.onrender.com/
-
-#### Link of the Frontend Deployment.
-
-https://aastha-chaudhary.netlify.app/
-
-#### Link of Project Demo.
-https://flashbackconnect.com/Movie.aspx?id=wmntXy83XDnrhYbwcA0VAA2
-
-#### Link of the deployment on netlify using github repo.
-https://main--aastha-chaudhary-expense-ease.netlify.app/
